@@ -17,6 +17,11 @@
     document.documentElement.lang = lang;
     btn.textContent = lang === 'ru' ? 'EN' : 'RU';
     localStorage.setItem('kamarooms-lang', lang);
+    // Update <option> elements with data-ru/data-en attributes
+    var opts = document.querySelectorAll('option[data-' + lang + ']');
+    for (var i = 0; i < opts.length; i++) {
+      opts[i].textContent = opts[i].getAttribute('data-' + lang);
+    }
   }
 
   update(saved);
