@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KamaRooms /open — Brand Guide</title>
+<meta name="description" content="Visual identity and design system for the KamaRooms /open transparency dashboard.">
+<link rel="icon" href="assets/favicon.ico">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="lang-ru">
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img src="assets/kamarooms-logo.svg" alt="KamaRooms" style="height: 22px; display: inline-block; vertical-align: middle; margin-right: 6px;">
+      <span>/open</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html"><span lang="ru">Главная</span><span lang="en">Home</span></a>
+      <a href="story.html"><span lang="ru">История</span><span lang="en">Story</span></a>
+      <a href="performance.html"><span lang="ru">Показатели</span><span lang="en">Performance</span></a>
+      <a href="guests.html"><span lang="ru">Гости</span><span lang="en">Guests</span></a>
+      <a href="team.html"><span lang="ru">Команда</span><span lang="en">Team</span></a>
+      <a href="pulse.html"><span lang="ru">Пульс</span><span lang="en">Pulse</span></a>
+      <a href="updates.html"><span lang="ru">Обновления</span><span lang="en">Updates</span></a>
+      <a href="handbook.html"><span lang="ru">Справочник</span><span lang="en">Handbook</span></a>
+      <a href="brandguide.html" class="active"><span lang="ru">Стиль</span><span lang="en">Brand</span></a>
+      <button class="lang-toggle" aria-label="Switch language">EN</button>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- ── Page Header ── -->
+<div class="page-header">
+  <div class="tag"><span lang="ru">Дизайн-система</span><span lang="en">Design System</span></div>
+  <h1><span lang="ru">Визуальная система /open</span><span lang="en">/open Visual Identity</span></h1>
+  <p class="subtitle">
+    <span lang="ru">Все цвета, шрифты, компоненты и правила тона. Всё, что нужно, чтобы это выглядело как Камарумс.</span>
+    <span lang="en">Every color, font, component, and tone rule. Everything needed to make it look like KamaRooms.</span>
+  </p>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 1. COLOR PALETTE                               -->
+<!-- ══════════════════════════════════════════════ -->
+<section style="margin-bottom: 48px;">
+  <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 8px;">
+    <span lang="ru">Цветовая палитра</span><span lang="en">Color Palette</span>
+  </h2>
+  <p style="color: var(--text-secondary); font-size: 15px; margin-bottom: 24px;">
+    <span lang="ru">Тёплые нейтральные тона. Зелёный акцент. Без неона, без градиентов.</span>
+    <span lang="en">Warm neutrals. Green accent. No neon, no gradients.</span>
+  </p>
+
+  <!-- Backgrounds -->
+  <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 12px;">
+    <span lang="ru">Фоны</span><span lang="en">Backgrounds</span>
+  </h3>
+  <div class="swatch-grid">
+    <div class="swatch" style="background: #FAFAF7; color: #1E1D1B;">
+      --bg<div class="hex">#FAFAF7</div>
+    </div>
+    <div class="swatch" style="background: #CEC7B7; color: #1E1D1B;">
+      --bg-warm<div class="hex">#CEC7B7</div>
+    </div>
+    <div class="swatch" style="background: #31313B; color: #E8E5E0;">
+      --bg-dark<div class="hex">#31313B</div>
+    </div>
+    <div class="swatch" style="background: #1E1D1B; color: #E8E5E0;">
+      --bg-charcoal<div class="hex">#1E1D1B</div>
+    </div>
+    <div class="swatch" style="background: #FFFFFF; color: #1E1D1B;">
+      --card<div class="hex">#FFFFFF</div>
+    </div>
+    <div class="swatch" style="background: #F5F3EF; color: #1E1D1B;">
+      --card-hover<div class="hex">#F5F3EF</div>
+    </div>
+  </div>
+
+  <!-- Borders -->
+  <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 12px;">
+    <span lang="ru">Границы</span><span lang="en">Borders</span>
+  </h3>
+  <div class="swatch-grid">
+    <div class="swatch" style="background: #E5E0D8; color: #1E1D1B;">
+      --border<div class="hex">#E5E0D8</div>
+    </div>
+    <div class="swatch" style="background: #3A3A42; color: #E8E5E0;">
+      --border-dark<div class="hex">#3A3A42</div>
+    </div>
+  </div>
+
+  <!-- Text -->
+  <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 12px;">
+    <span lang="ru">Текст</span><span lang="en">Text</span>
+  </h3>
+  <div class="swatch-grid">
+    <div class="swatch" style="background: #1E1D1B; color: #E8E5E0;">
+      --text<div class="hex">#1E1D1B</div>
+    </div>
+    <div class="swatch" style="background: #685E59; color: #FAFAF7;">
+      --text-secondary<div class="hex">#685E59</div>
+    </div>
+    <div class="swatch" style="background: #7F7D7A; color: #FAFAF7;">
+      --text-muted<div class="hex">#7F7D7A</div>
+    </div>
+    <div class="swatch" style="background: #31313B; color: #E8E5E0;">
+      --text-on-dark<div class="hex">#E8E5E0</div>
+    </div>
+    <div class="swatch" style="background: #31313B; color: #9E9B97;">
+      --text-muted-dark<div class="hex">#9E9B97</div>
+    </div>
+  </div>
+
+  <!-- Accents -->
+  <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 12px;">
+    <span lang="ru">Акценты</span><span lang="en">Accents</span>
+  </h3>
+  <div class="swatch-grid">
+    <div class="swatch" style="background: #4FD215; color: #1E1D1B;">
+      --green<div class="hex">#4FD215</div>
+    </div>
+    <div class="swatch" style="background: rgba(79,210,21,0.12); color: #3BA510; border-color: #3BA510;">
+      --green-dim<div class="hex">rgba(79,210,21,0.12)</div>
+    </div>
+    <div class="swatch" style="background: #3BA510; color: #FAFAF7;">
+      --green-dark<div class="hex">#3BA510</div>
+    </div>
+    <div class="swatch" style="background: #D4A853; color: #1E1D1B;">
+      --gold<div class="hex">#D4A853</div>
+    </div>
+    <div class="swatch" style="background: #FF8562; color: #1E1D1B;">
+      --coral<div class="hex">#FF8562</div>
+    </div>
+    <div class="swatch" style="background: #D94040; color: #FAFAF7;">
+      --red<div class="hex">#D94040</div>
+    </div>
+    <div class="swatch" style="background: #4A90D9; color: #FAFAF7;">
+      --blue<div class="hex">#4A90D9</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 2. TYPOGRAPHY                                  -->
+<!-- ══════════════════════════════════════════════ -->
+<section style="margin-bottom: 48px;">
+  <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 8px;">
+    <span lang="ru">Типографика</span><span lang="en">Typography</span>
+  </h2>
+  <p style="color: var(--text-secondary); font-size: 15px; margin-bottom: 24px;">
+    <span lang="ru">Stolzl. Геометрический гротеск, источённый с kamarooms.com (Tilda CDN). Пять весов от Thin до Bold.</span>
+    <span lang="en">Stolzl. Geometric sans-serif, sourced from kamarooms.com (Tilda CDN). Five weights from Thin to Bold.</span>
+  </p>
+
+  <div class="callout" style="margin-bottom: 24px;">
+    <strong>Font stack:</strong>
+    <code style="font-size: 13px; background: var(--bg); padding: 4px 8px; border-radius: 4px; display: inline-block; margin-top: 4px;">
+      'Stolzl', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif
+    </code>
+  </div>
+
+  <div class="font-sample">
+    <div class="weight-label">Thin / 100</div>
+    <p style="font-weight: 100; font-size: 28px; line-height: 1.3;">
+      <span lang="ru">Камарумс. Первый открытый отель в мире.</span>
+      <span lang="en">KamaRooms. The world's first open hotel.</span>
+    </p>
+  </div>
+
+  <div class="font-sample">
+    <div class="weight-label">Light / 300</div>
+    <p style="font-weight: 300; font-size: 28px; line-height: 1.3;">
+      <span lang="ru">Камарумс. Первый открытый отель в мире.</span>
+      <span lang="en">KamaRooms. The world's first open hotel.</span>
+    </p>
+  </div>
+
+  <div class="font-sample">
+    <div class="weight-label">Regular / 400</div>
+    <p style="font-weight: 400; font-size: 28px; line-height: 1.3;">
+      <span lang="ru">Камарумс. Первый открытый отель в мире.</span>
+      <span lang="en">KamaRooms. The world's first open hotel.</span>
+    </p>
+  </div>
+
+  <div class="font-sample">
+    <div class="weight-label">Medium / 500</div>
+    <p style="font-weight: 500; font-size: 28px; line-height: 1.3;">
+      <span lang="ru">Камарумс. Первый открытый отель в мире.</span>
+      <span lang="en">KamaRooms. The world's first open hotel.</span>
+    </p>
+  </div>
+
+  <div class="font-sample">
+    <div class="weight-label">Bold / 700</div>
+    <p style="font-weight: 700; font-size: 28px; line-height: 1.3;">
+      <span lang="ru">Камарумс. Первый открытый отель в мире.</span>
+      <span lang="en">KamaRooms. The world's first open hotel.</span>
+    </p>
+  </div>
+
+  <div style="margin-top: 24px;">
+    <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 12px;">
+      <span lang="ru">Масштаб</span><span lang="en">Scale</span>
+    </h3>
+    <div class="metric-grid">
+      <div class="metric-card">
+        <div class="label">H1</div>
+        <div class="value" style="font-size: 36px;">36px / 800</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">H2</div>
+        <div class="value" style="font-size: 24px;">24px / 800</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">H3</div>
+        <div class="value" style="font-size: 22px;">22px / 800</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Body</div>
+        <div class="value" style="font-size: 16px;">16px / 400</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Small</div>
+        <div class="value" style="font-size: 13px;">13px / 500</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Tag / Label</div>
+        <div class="value" style="font-size: 11px; text-transform: uppercase; letter-spacing: 2px;">11px / 700</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 3. COMPONENT PATTERNS                          -->
+<!-- ══════════════════════════════════════════════ -->
+<section style="margin-bottom: 48px;">
+  <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 8px;">
+    <span lang="ru">Компоненты</span><span lang="en">Components</span>
+  </h2>
+  <p style="color: var(--text-secondary); font-size: 15px; margin-bottom: 32px;">
+    <span lang="ru">Живые примеры каждого элемента дизайн-системы. Скопируй HTML, вставь, работает.</span>
+    <span lang="en">Live examples of every design system element. Copy the HTML, paste, it works.</span>
+  </p>
+
+  <!-- Hero Cards -->
+  <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 16px;">
+    <span lang="ru">Hero-карточки</span><span lang="en">Hero Cards</span>
+  </h3>
+  <div class="hero-grid" style="margin-bottom: 40px;">
+    <div class="hero-card">
+      <div class="label"><span lang="ru">Загрузка</span><span lang="en">Occupancy</span></div>
+      <div class="value">78%</div>
+      <div class="context"><span lang="ru">Ноябрь 2025</span><span lang="en">November 2025</span></div>
+    </div>
+    <div class="hero-card">
+      <div class="label"><span lang="ru">Средняя цена</span><span lang="en">ADR</span></div>
+      <div class="value" style="color: var(--green-dark);">4 280 &#8381;</div>
+      <div class="context"><span lang="ru">+18% г/г</span><span lang="en">+18% YoY</span></div>
+    </div>
+    <div class="hero-card">
+      <div class="label"><span lang="ru">Рейтинг</span><span lang="en">Rating</span></div>
+      <div class="value">9.4</div>
+      <div class="context">Yandex</div>
+    </div>
+  </div>
+
+  <!-- Metric Cards -->
+  <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 16px;">
+    <span lang="ru">Metric-карточки</span><span lang="en">Metric Cards</span>
+  </h3>
+  <div class="metric-grid" style="margin-bottom: 40px;">
+    <div class="metric-card">
+      <div class="label"><span lang="ru">Номера</span><span lang="en">Rooms</span></div>
+      <div class="value">108</div>
+      <div class="sublabel"><span lang="ru">После реконструкции</span><span lang="en">Post-reconstruction</span></div>
+    </div>
+    <div class="metric-card">
+      <div class="label"><span lang="ru">Реконструкция</span><span lang="en">Rebuild Cost</span></div>
+      <div class="value">90M+</div>
+      <div class="sublabel">RUB</div>
+    </div>
+    <div class="metric-card placeholder">
+      <div class="label"><span lang="ru">Скоро</span><span lang="en">Coming</span></div>
+      <div class="value">---</div>
+      <div class="sublabel"><span lang="ru">Заглушка</span><span lang="en">Placeholder state</span></div>
+    </div>
+  </div>
+
+  <!-- Section Card -->
+  <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 16px;">
+    <span lang="ru">Карточки разделов</span><span lang="en">Section Cards</span>
+  </h3>
+  <a href="#" class="section-card" style="margin-bottom: 40px;" onclick="return false;">
+    <div class="section-card-header">
+      <div>
+        <div class="tag"><span lang="ru">Финансы</span><span lang="en">Financials</span></div>
+        <h3><span lang="ru">Выручка и расходы</span><span lang="en">Revenue and Costs</span></h3>
+      </div>
+      <span class="arrow">&rarr;</span>
+    </div>
+    <p><span lang="ru">Реальные цифры. Без округлений и маркетинговых формулировок.</span><span lang="en">Real numbers. No rounding, no marketing spin.</span></p>
+  </a>
+
+  <!-- Dark Section -->
+  <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 16px;">
+    <span lang="ru">Тёмная секция</span><span lang="en">Dark Section</span>
+  </h3>
+  <div class="dark-section" style="margin-bottom: 40px;">
+    <h3><span lang="ru">Почему мы это публикуем</span><span lang="en">Why we publish this</span></h3>
+    <p><span lang="ru">Потому что скрывать данные отеля <span class="accent">скучно</span>. Индустрия гостеприимства закрыта по привычке, а не по необходимости.</span><span lang="en">Because hiding hotel data is <span class="accent">boring</span>. Hospitality is closed by habit, not necessity.</span></p>
+  </div>
+
+  <!-- Warm Section -->
+  <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 16px;">
+    <span lang="ru">Тёплая секция</span><span lang="en">Warm Section</span>
+  </h3>
+  <div class="warm-section" style="margin-bottom: 40px;">
+    <h3><span lang="ru">Мы не идеальные</span><span lang="en">We are not perfect</span></h3>
+    <p><span lang="ru">У нас есть проблемы. Мы их публикуем. Так честнее, чем притворяться, что всё под контролем.</span><span lang="en">We have problems. We publish them. That is more honest than pretending everything is under control.</span></p>
+  </div>
+
+  <!-- Callout Box -->
+  <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 16px;">
+    <span lang="ru">Выноска</span><span lang="en">Callout Box</span>
+  </h3>
+  <div class="callout" style="margin-bottom: 40px;">
+    <strong><span lang="ru">Примечание:</span><span lang="en">Note:</span></strong>
+    <span lang="ru">Зелёная полоска слева. Используется для контекста, пояснений и важных замечаний. Не для предупреждений.</span>
+    <span lang="en">Green left border. Used for context, clarifications, and important notes. Not for warnings.</span>
+  </div>
+
+  <!-- Coming Soon -->
+  <h3 style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin-bottom: 16px;">
+    <span lang="ru">Заглушка</span><span lang="en">Placeholder</span>
+  </h3>
+  <div class="coming-soon" style="margin-bottom: 40px;">
+    <div class="label"><span lang="ru">Скоро</span><span lang="en">Coming Soon</span></div>
+    <p><span lang="ru">Раздел в разработке. Данные собираются.</span><span lang="en">Section under development. Data is being collected.</span></p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 4. SPACING & LAYOUT                            -->
+<!-- ══════════════════════════════════════════════ -->
+<section style="margin-bottom: 48px;">
+  <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 8px;">
+    <span lang="ru">Сетка и отступы</span><span lang="en">Spacing &amp; Layout</span>
+  </h2>
+  <p style="color: var(--text-secondary); font-size: 15px; margin-bottom: 24px;">
+    <span lang="ru">Простая система. Никаких 12-колоночных сеток. CSS Grid с auto-fit.</span>
+    <span lang="en">Simple system. No 12-column grids. CSS Grid with auto-fit.</span>
+  </p>
+
+  <div class="metric-grid">
+    <div class="metric-card">
+      <div class="label">max-width</div>
+      <div class="value" style="font-size: 28px;">960px</div>
+      <div class="sublabel"><span lang="ru">Контейнер</span><span lang="en">Container</span></div>
+    </div>
+    <div class="metric-card">
+      <div class="label">padding</div>
+      <div class="value" style="font-size: 28px;">20px</div>
+      <div class="sublabel"><span lang="ru">Боковые отступы</span><span lang="en">Side padding</span></div>
+    </div>
+    <div class="metric-card">
+      <div class="label">gap</div>
+      <div class="value" style="font-size: 28px;">16px</div>
+      <div class="sublabel"><span lang="ru">Между карточками</span><span lang="en">Between cards</span></div>
+    </div>
+    <div class="metric-card">
+      <div class="label">border-radius</div>
+      <div class="value" style="font-size: 28px;">16px</div>
+      <div class="sublabel"><span lang="ru">Карточки</span><span lang="en">Cards</span></div>
+    </div>
+    <div class="metric-card">
+      <div class="label">border-radius</div>
+      <div class="value" style="font-size: 28px;">20px</div>
+      <div class="sublabel"><span lang="ru">Секции (dark/warm)</span><span lang="en">Sections (dark/warm)</span></div>
+    </div>
+    <div class="metric-card">
+      <div class="label">narrative max-width</div>
+      <div class="value" style="font-size: 28px;">680px</div>
+      <div class="sublabel"><span lang="ru">Текстовый контент</span><span lang="en">Text content</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 5. TONE OF VOICE                               -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="dark-section">
+  <h3><span lang="ru">Тон и голос</span><span lang="en">Tone of Voice</span></h3>
+  <p><span lang="ru">Прямо. Коротко. Без корпоративной чуши. «Мы опубликовали это потому что скрывать данные отеля скучно.» Это наш тон. Настоящие цифры, настоящие слова, настоящие ошибки.</span><span lang="en">Direct. Punchy. No corporate BS. "We published this because hiding hotel data is boring." That is our tone. Real numbers, real words, real mistakes.</span></p>
+  <p><span lang="ru">Три источника вдохновения:</span><span lang="en">Three design inspirations:</span></p>
+  <p>
+    <span lang="ru"><span class="accent">Buffer</span> /open. Структура. Метрики в карточках, прозрачность как продукт.</span>
+    <span lang="en"><span class="accent">Buffer</span> /open. Structure. Metrics in cards, transparency as product.</span>
+  </p>
+  <p>
+    <span lang="ru"><span class="accent">Honest Greens</span>. Тепло. Бежевые тона, натуральные материалы, человеческий голос.</span>
+    <span lang="en"><span class="accent">Honest Greens</span>. Warmth. Beige tones, natural textures, human voice.</span>
+  </p>
+  <p>
+    <span lang="ru"><span class="accent">dBrand</span>. Острота (7/10). Не боимся быть прямыми. Но не грубыми.</span>
+    <span lang="en"><span class="accent">dBrand</span>. Edge (7/10). Not afraid to be direct. But not rude.</span>
+  </p>
+</div>
+
+<div class="callout" style="margin: 24px 0 48px;">
+  <strong><span lang="ru">Правило:</span><span lang="en">Rule:</span></strong>
+  <span lang="ru">Если текст звучит так, будто его написал маркетолог, перепиши. Если звучит как README проекта с открытым кодом, ты на верном пути.</span>
+  <span lang="en">If the text sounds like a marketer wrote it, rewrite. If it sounds like an open-source project README, you are on the right track.</span>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- 6. LOGO USAGE                                  -->
+<!-- ══════════════════════════════════════════════ -->
+<section style="margin-bottom: 48px;">
+  <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 8px;">
+    <span lang="ru">Логотип</span><span lang="en">Logo Usage</span>
+  </h2>
+  <p style="color: var(--text-secondary); font-size: 15px; margin-bottom: 24px;">
+    <span lang="ru">Два варианта. Тёмный для светлого фона, белый для тёмного.</span>
+    <span lang="en">Two variants. Dark for light backgrounds, white for dark backgrounds.</span>
+  </p>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+    <div style="background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center;">
+      <img src="assets/kamarooms-logo.svg" alt="KamaRooms logo (dark)" style="max-width: 200px; margin-bottom: 16px;">
+      <div style="font-size: 12px; color: var(--text-muted); font-weight: 600;">
+        kamarooms-logo.svg
+        <br><span lang="ru">Для светлого фона</span><span lang="en">For light backgrounds</span>
+      </div>
+    </div>
+    <div style="background: var(--bg-charcoal); border-radius: 16px; padding: 40px; text-align: center;">
+      <img src="assets/kamarooms-logo-white.png" alt="KamaRooms logo (white)" style="max-width: 200px; margin-bottom: 16px;">
+      <div style="font-size: 12px; color: var(--text-muted-dark); font-weight: 600;">
+        kamarooms-logo-white.png
+        <br><span lang="ru">Для тёмного фона</span><span lang="en">For dark backgrounds</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="freshness"><span lang="ru">Данные по состоянию на ноябрь 2025</span><span lang="en">Data as of November 2025</span></div>
+  <p><a href="https://kamarooms.com">kamarooms.com</a> · <span lang="ru">Набережные Челны</span><span lang="en">Naberezhnye Chelny</span> · 108 <span lang="ru">номеров</span><span lang="en">rooms</span> · 4&#9733;</p>
+  <p class="tagline"><span lang="ru">Ни один другой отель этого не делает. В этом и суть.</span><span lang="en">No other hotel does this. That's the point.</span></p>
+</footer>
+
+<script src="assets/i18n.js"></script>
+</body>
+</html>
