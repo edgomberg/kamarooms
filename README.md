@@ -42,7 +42,7 @@ All pages live at [edgomberg.github.io/kamarooms/](https://edgomberg.github.io/k
 
 ## Data
 
-All metrics are real. Sourced from the hotel's property management system and financial records. Data as of November 2025.
+All metrics are real. Sourced from the hotel's property management system and financial records. Data as of February 2026.
 
 ## License
 
