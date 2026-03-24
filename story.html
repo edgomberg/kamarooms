@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KamaRooms /open — Story</title>
+<title>История — Камарумс</title>
 <meta name="description" content="Отель, который горел, восстановился и решил показать всё. История Камарумс с 2009 года.">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:type" content="website">
@@ -15,27 +15,623 @@
 <link rel="alternate" hreflang="ru" href="https://open.kamarooms.com/story.html">
 <link rel="alternate" hreflang="x-default" href="https://open.kamarooms.com/">
 <link rel="icon" href="assets/favicon.ico">
-<link rel="stylesheet" href="assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+<style>
+  /* Stolzl — Kamarooms brand font (from kamarooms.com Tilda CDN) */
+  @font-face { font-family: 'Stolzl'; src: url('https://static.tildacdn.com/tild6561-3431-4337-b366-313134633462/Stolzl-Thin.woff') format('woff'); font-weight: 100; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Stolzl'; src: url('https://static.tildacdn.com/tild6561-6337-4461-b933-303864333239/Stolzl-Light.woff') format('woff'); font-weight: 300; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Stolzl'; src: url('https://static.tildacdn.com/tild3461-6461-4435-a464-626338343365/Stolzl-Regular.woff') format('woff'); font-weight: 400; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Stolzl'; src: url('https://static.tildacdn.com/tild3531-3636-4136-b336-326137663366/Stolzl-Medium.woff') format('woff'); font-weight: 500; font-style: normal; font-display: swap; }
+  @font-face { font-family: 'Stolzl'; src: url('https://static.tildacdn.com/tild3334-6234-4266-b234-333036306634/Stolzl-Bold.woff') format('woff'); font-weight: 700; font-style: normal; font-display: swap; }
+
+  /*
+   * Design system: Kamarooms /Open
+   * Palette + font sourced from kamarooms.com
+   * Voice: Buffer structure + Honest Greens warmth + dBrand edge (7/10)
+   */
+  :root {
+    /* Kamarooms brand palette */
+    --bg: #FAFAF7;
+    --bg-warm: #CEC7B7;
+    --bg-dark: #31313B;
+    --bg-charcoal: #1E1D1B;
+    --card: #FFFFFF;
+    --card-hover: #F5F3EF;
+    --border: #E5E0D8;
+    --border-dark: #3A3A42;
+
+    /* Text */
+    --text: #1E1D1B;
+    --text-secondary: #685E59;
+    --text-muted: #7F7D7A;
+    --text-on-dark: #E8E5E0;
+    --text-muted-dark: #9E9B97;
+
+    /* Accents */
+    --green: #4FD215;
+    --green-dim: rgba(79, 210, 21, 0.12);
+    --green-dark: #3BA510;
+    --gold: #D4A853;
+    --coral: #FF8562;
+    --red: #D94040;
+    --blue: #4A90D9;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Stolzl', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+
+  /* ── Navigation ── */
+  nav {
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+    position: sticky;
+    top: 0;
+    background: rgba(250, 250, 247, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 100;
+  }
+  .nav-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .nav-brand {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .nav-brand span {
+    color: var(--green);
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 8px;
+    white-space: nowrap;
+    transition: color 0.15s, background 0.15s;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  .nav-links a:hover { color: var(--text); background: var(--card-hover); }
+  .nav-links a.active { color: var(--green-dark); background: var(--green-dim); font-weight: 700; }
+
+  /* ── Hero cards ── */
+  .hero-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .hero-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 24px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .hero-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(30, 29, 27, 0.08);
+  }
+  .hero-card .label {
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+  .hero-card .value {
+    font-size: 40px;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+    color: var(--text);
+  }
+  .hero-card .context {
+    color: var(--text-muted);
+    font-size: 12px;
+    margin-top: 8px;
+  }
+
+  /* ── Section cards (hub teasers) ── Honest Greens asymmetric card feel */
+  .section-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 12px;
+    text-decoration: none;
+    color: var(--text);
+    display: block;
+    transition: transform 0.15s, box-shadow 0.2s, border-color 0.15s;
+  }
+  .section-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(30, 29, 27, 0.08);
+    border-color: var(--bg-warm);
+  }
+  .section-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .section-card .tag {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .section-card h3 {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+  .section-card .arrow {
+    color: var(--green);
+    font-size: 22px;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  .section-card:hover .arrow { transform: translateX(6px); }
+  .section-card p {
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── Page headers — Honest Greens 3-layer: tag + massive headline + body ── */
+  .page-header {
+    padding: 56px 0 40px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 40px;
+  }
+  .page-header .tag {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--green-dark);
+    margin-bottom: 8px;
+  }
+  .page-header h1 {
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .page-header .subtitle {
+    color: var(--text-secondary);
+    font-size: 16px;
+    max-width: 600px;
+    line-height: 1.6;
+  }
+  .page-header .freshness {
+    color: var(--text-muted);
+    font-size: 12px;
+    margin-top: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* ── Chart sections ── */
+  .chart-section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    margin-bottom: 24px;
+  }
+  .chart-section h3 {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+  .chart-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .chart-tabs {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .chart-tabs button {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+    min-height: 44px;
+  }
+  .chart-tabs button.active {
+    background: var(--bg-charcoal);
+    color: white;
+    border-color: var(--bg-charcoal);
+    font-weight: 700;
+  }
+  .chart-tabs button:hover:not(.active) {
+    border-color: var(--text-muted);
+    color: var(--text);
+  }
+  .time-range select {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: inherit;
+    min-height: 44px;
+    cursor: pointer;
+  }
+  .chart-wrapper {
+    position: relative;
+    height: 320px;
+  }
+
+  /* ── Metric cards ── */
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .metric-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    transition: transform 0.15s, box-shadow 0.2s;
+  }
+  .metric-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(30, 29, 27, 0.06);
+  }
+  .metric-card .label {
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+  }
+  .metric-card .value {
+    font-size: 32px;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
+  }
+  .metric-card .sublabel {
+    color: var(--text-muted);
+    font-size: 12px;
+    margin-top: 6px;
+  }
+  .metric-card.placeholder .value { color: var(--bg-warm); }
+
+  /* ── Rating badges ── */
+  .ratings-row {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .rating-badge { text-align: center; }
+  .rating-badge .platform {
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .rating-badge .score {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--text);
+  }
+  .rating-badge .scale {
+    color: var(--text-muted);
+    font-size: 12px;
+  }
+
+  /* ── Fun fact cards — screenshot-worthy ── */
+  .fact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .fact-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 24px;
+    text-align: center;
+    transition: transform 0.15s, box-shadow 0.2s;
+  }
+  .fact-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(30, 29, 27, 0.08);
+  }
+  .fact-card .emoji { font-size: 36px; margin-bottom: 12px; }
+  .fact-card .fact-value {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .fact-card .fact-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+  .fact-card .fact-context {
+    color: var(--text-muted);
+    font-size: 12px;
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  /* ── Update cards ── */
+  .update-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 12px;
+    text-decoration: none;
+    color: var(--text);
+    display: block;
+    transition: transform 0.15s, box-shadow 0.2s;
+  }
+  .update-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(30, 29, 27, 0.06);
+  }
+  .update-card .date {
+    color: var(--green-dark);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  .update-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .update-card p { color: var(--text-secondary); font-size: 14px; }
+
+  /* ── Narrative content ── */
+  .narrative { max-width: 680px; }
+  .narrative h2 {
+    font-size: 24px;
+    font-weight: 800;
+    margin: 40px 0 16px;
+  }
+  .narrative p {
+    font-size: 16px;
+    margin-bottom: 16px;
+    line-height: 1.75;
+    color: var(--text-secondary);
+  }
+  .narrative .kpi-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 28px 0;
+    font-size: 14px;
+  }
+  .narrative .kpi-table th,
+  .narrative .kpi-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .narrative .kpi-table th {
+    color: var(--text-muted);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+  }
+  .narrative .kpi-table .change-up { color: var(--green-dark); font-weight: 600; }
+  .narrative .kpi-table .change-down { color: var(--red); font-weight: 600; }
+
+  /* ── Dark sections (alternating rhythm like kamarooms.com) ── */
+  .dark-section {
+    background: var(--bg-dark);
+    color: var(--text-on-dark);
+    border-radius: 20px;
+    padding: 48px 40px;
+    margin: 40px 0;
+  }
+  .dark-section h3 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: white;
+  }
+  .dark-section p {
+    color: var(--text-muted-dark);
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 560px;
+  }
+  .dark-section p + p { margin-top: 12px; }
+  .dark-section .accent { color: var(--green); }
+
+  /* ── Warm section (beige band) ── */
+  .warm-section {
+    background: var(--bg-warm);
+    color: var(--text);
+    border-radius: 20px;
+    padding: 48px 40px;
+    margin: 40px 0;
+  }
+  .warm-section h3 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 16px;
+  }
+  .warm-section p {
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 560px;
+  }
+
+  /* ── Callout box ── */
+  .callout {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--green);
+    border-radius: 0 12px 12px 0;
+    padding: 24px 28px;
+    margin: 24px 0;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+  .callout strong { color: var(--text); }
+
+  /* ── Placeholder state ── */
+  .coming-soon {
+    text-align: center;
+    padding: 48px 24px;
+    background: var(--card);
+    border: 2px dashed var(--border);
+    border-radius: 16px;
+    margin-bottom: 24px;
+  }
+  .coming-soon .label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    color: var(--green-dark);
+  }
+  .coming-soon p {
+    color: var(--text-muted);
+    font-size: 14px;
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ── Footer ── */
+  footer {
+    text-align: center;
+    padding: 48px 0;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+  }
+  footer .freshness {
+    color: var(--text-muted);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+  footer p { color: var(--text-muted); font-size: 13px; }
+  footer a { color: var(--green-dark); text-decoration: none; font-weight: 500; }
+  footer a:hover { text-decoration: underline; }
+  footer .tagline {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 16px;
+    font-style: italic;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .page-header h1 { font-size: 28px; }
+    .hero-card .value { font-size: 32px; }
+    .dark-section, .warm-section { padding: 32px 24px; border-radius: 16px; }
+    .section-card { padding: 24px; }
+    .chart-wrapper { height: 260px; }
+  }
+
+  @media (max-width: 1024px) and (min-width: 641px) {
+    h1 { font-size: 36px; }
+    .hero-grid { grid-template-columns: repeat(2, 1fr); }
+    .metric-grid { grid-template-columns: repeat(2, 1fr); }
+    .fact-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+
+</style>
+
+
 </head>
 <body>
 
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="nav-brand">
-      <img src="assets/kamarooms-logo.svg" alt="KamaRooms" style="height: 22px; display: inline-block; vertical-align: middle; margin-right: 6px;">
+      <img src="assets/kamarooms-logo.svg" alt="Камарумс" style="height: 22px; display: inline-block; vertical-align: middle; margin-right: 6px;">
       <span>/open</span>
     </a>
     <div class="nav-links">
-      <a href="index.html"><span lang="ru">Главная</span><span lang="en">Home</span></a>
-      <a href="story.html" class="active"><span lang="ru">История</span><span lang="en">Story</span></a>
-      <a href="performance.html"><span lang="ru">Показатели</span><span lang="en">Performance</span></a>
-      <a href="guests.html"><span lang="ru">Гости</span><span lang="en">Guests</span></a>
-      <a href="team.html"><span lang="ru">Команда</span><span lang="en">Team</span></a>
-      <a href="pulse.html"><span lang="ru">Пульс</span><span lang="en">Pulse</span></a>
-      <a href="updates.html"><span lang="ru">Обновления</span><span lang="en">Updates</span></a>
-      <a href="handbook.html"><span lang="ru">Справочник</span><span lang="en">Handbook</span></a>
-      <a href="brandguide.html"><span lang="ru">Стиль</span><span lang="en">Brand</span></a>
-      <button class="lang-toggle" aria-label="Switch language">EN</button>
+      <a href="index.html" >Главная</a>
+      <a href="story.html" class="active">История</a>
+      <a href="performance.html" >Показатели</a>
+      <a href="guests.html" >Гости</a>
+      <a href="team.html" >Команда</a>
+      <a href="pulse.html" >Пульс</a>
+      <a href="updates.html" >Обновления</a>
+      <a href="handbook.html" >Справочник</a>
+      <a href="kamalab.html" >KamaLab</a>
     </div>
   </div>
 </nav>
@@ -44,26 +640,27 @@
 
 <!-- ═══ PAGE HEADER ═══ -->
 <div class="page-header" style="text-align: center; border-bottom: none; padding-bottom: 0;">
-  <div class="tag"><span lang="ru">ИСТОРИЯ</span><span lang="en">STORY</span></div>
-  <h1><span lang="ru">Мы горели. Буквально.</span><span lang="en">We burned. Literally.</span></h1>
+  <div class="tag">ИСТОРИЯ</div>
+  <h1>Мы горели. Буквально.</h1>
   <p class="subtitle" style="margin: 0 auto;">
-    <span lang="ru">Отель, который горел, восстановился за свой счёт и не уволил ни одного человека. Теперь мы показываем всё.</span><span lang="en">A hotel that caught fire, rebuilt at its own expense, didn't lay off a single person. Now we show you everything.</span>
+    Отель, который горел, восстановился за свой счёт и не уволил ни одного человека. Теперь мы показываем всё.
   </p>
 </div>
 
 <!-- ═══ TIMELINE HERO ═══ -->
 <div class="dark-section" style="margin-top: 40px;">
   <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--green); margin-bottom: 24px;">
-    2009 → <span lang="ru">СЕГОДНЯ</span><span lang="en">TODAY</span>
+    2009 → СЕГОДНЯ
   </div>
   <div style="display: grid; gap: 32px;">
 
     <div style="display: flex; gap: 20px; align-items: flex-start;">
       <span style="font-weight: 700; font-size: 18px; color: var(--green); white-space: nowrap; min-width: 60px;">2009</span>
       <div>
-        <div style="font-weight: 700; color: white; margin-bottom: 4px;"><span lang="ru">Открытие</span><span lang="en">Opening</span></div>
+        <div style="font-weight: 700; color: white; margin-bottom: 4px;">Открытие</div>
         <div style="color: var(--text-muted-dark); font-size: 14px; line-height: 1.6;">
-          <span lang="ru">108 номеров. Набережные Челны. Один из первых отелей с SPA-центром в городе. Здание — бывшая советская постройка, которую семья Гомберг расширила и надстроила.</span><span lang="en">108 rooms. Naberezhnye Chelny. One of the city's first hotels with a full spa. The building was a former Soviet structure that the Gomberg family expanded and built upward.</span>
+          108 номеров. Набережные Челны. Один из первых отелей с SPA-центром в городе.
+          Здание — бывшая советская постройка, которую семья Гомберг расширила и надстроила.
         </div>
       </div>
     </div>
@@ -71,9 +668,9 @@
     <div style="display: flex; gap: 20px; align-items: flex-start;">
       <span style="font-weight: 700; font-size: 18px; color: var(--green); white-space: nowrap; min-width: 60px;">2015</span>
       <div>
-        <div style="font-weight: 700; color: white; margin-bottom: 4px;"><span lang="ru">Первые 100 миллионов</span><span lang="en">First 100 million</span></div>
+        <div style="font-weight: 700; color: white; margin-bottom: 4px;">Первые 100 миллионов</div>
         <div style="color: var(--text-muted-dark); font-size: 14px; line-height: 1.6;">
-          <span lang="ru">Выручка впервые превысила 100 млн ₽. SPA List стал отдельным брендом с экологической философией.</span><span lang="en">Revenue crossed 100M rubles for the first time. SPA List became its own brand with an ecological philosophy.</span>
+          Выручка впервые превысила 100 млн ₽. SPA List стал отдельным брендом с экологической философией.
         </div>
       </div>
     </div>
@@ -83,7 +680,7 @@
       <div>
         <div style="font-weight: 700; color: white; margin-bottom: 4px;">COVID</div>
         <div style="color: var(--text-muted-dark); font-size: 14px; line-height: 1.6;">
-          <span lang="ru">Загрузка упала до 40%. Не уволили ни одного сотрудника. Это будет важно через три года.</span><span lang="en">Occupancy dropped to 40%. Not a single employee was let go. That decision would matter three years later.</span>
+          Загрузка упала до 40%. Не уволили ни одного сотрудника. Это будет важно через три года.
         </div>
       </div>
     </div>
@@ -91,9 +688,9 @@
     <div style="display: flex; gap: 20px; align-items: flex-start;">
       <span style="font-weight: 700; font-size: 18px; color: var(--coral); white-space: nowrap; min-width: 60px;">2023</span>
       <div>
-        <div style="font-weight: 700; color: var(--coral); margin-bottom: 4px;"><span lang="ru">Пожар</span><span lang="en">Fire</span></div>
+        <div style="font-weight: 700; color: var(--coral); margin-bottom: 4px;">Пожар</div>
         <div style="color: var(--text-muted-dark); font-size: 14px; line-height: 1.6;">
-          <span lang="ru">28 октября. Подробности — ниже.</span><span lang="en">October 28. Details below.</span>
+          28 октября. Подробности — ниже.
         </div>
       </div>
     </div>
@@ -101,9 +698,9 @@
     <div style="display: flex; gap: 20px; align-items: flex-start;">
       <span style="font-weight: 700; font-size: 18px; color: var(--green); white-space: nowrap; min-width: 60px;">2024</span>
       <div>
-        <div style="font-weight: 700; color: white; margin-bottom: 4px;"><span lang="ru">Восстановление</span><span lang="en">Recovery</span></div>
+        <div style="font-weight: 700; color: white; margin-bottom: 4px;">Восстановление</div>
         <div style="color: var(--text-muted-dark); font-size: 14px; line-height: 1.6;">
-          <span lang="ru">Ресторан открылся первым. Полная реконструкция шла без выходных. Отель вернулся к работе.</span><span lang="en">The restaurant reopened first. Full reconstruction ran seven days a week. The hotel came back.</span>
+          Ресторан открылся первым. Полная реконструкция шла без выходных. Отель вернулся к работе.
         </div>
       </div>
     </div>
@@ -111,9 +708,10 @@
     <div style="display: flex; gap: 20px; align-items: flex-start;">
       <span style="font-weight: 700; font-size: 18px; color: var(--green); white-space: nowrap; min-width: 60px;">2025</span>
       <div>
-        <div style="font-weight: 700; color: white; margin-bottom: 4px;"><span lang="ru">Рекорд</span><span lang="en">Record year</span></div>
+        <div style="font-weight: 700; color: white; margin-bottom: 4px;">Рекорд</div>
         <div style="color: var(--text-muted-dark); font-size: 14px; line-height: 1.6;">
-          <span lang="ru">Выручка 206.4 млн ₽ при 152 млн до пожара. Рост 35.8% после того, как отеля не существовало несколько месяцев. Рейтинг Booking.com — 9.4. Награда «Хорошее место 2026» от Яндекса.</span><span lang="en">Revenue hit 206.4M rubles vs. 152M before the fire. That's 35.8% growth after the hotel didn't exist for months. Booking.com rating: 9.4. Yandex "Great Place 2026" award.</span>
+          Выручка 172.7 млн ₽ при 152 млн до пожара. Рост 13.5% после того, как отеля не существовало несколько месяцев.
+          Рейтинг Booking.com — 9.4. Награда «Хорошее место 2026» от Яндекса.
         </div>
       </div>
     </div>
@@ -123,7 +721,8 @@
       <div>
         <div style="font-weight: 700; color: white; margin-bottom: 4px;">/open</div>
         <div style="color: var(--text-muted-dark); font-size: 14px; line-height: 1.6;">
-          <span lang="ru">Первый отель в мире, который публикует свои реальные показатели. Вы сейчас читаете результат.</span><span lang="en">The first hotel in the world to publish its real numbers. You're reading the result.</span>
+          Первый отель в мире, который публикует свои реальные показатели.
+          Вы сейчас читаете результат.
         </div>
       </div>
     </div>
@@ -134,130 +733,131 @@
 <!-- ═══ THE FIRE ═══ -->
 <div style="padding: 56px 0 0;">
   <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--coral); margin-bottom: 12px;">
-    <span lang="ru">28 ОКТЯБРЯ 2023</span><span lang="en">OCTOBER 28, 2023</span>
+    28 ОКТЯБРЯ 2023
   </div>
   <h2 style="font-size: 36px; font-weight: 800; line-height: 1.15; margin-bottom: 24px;">
-    <span lang="ru">Горим. Без комментариев.</span><span lang="en">On fire. No comment.</span>
+    Горим. Без комментариев.
   </h2>
 </div>
 
 <div class="narrative">
   <p>
-    <span lang="ru">Суббота. Около 9:20 утра огонь вспыхнул на вентилируемом фасаде третьего этажа. В 9:40 сигнал поступил в МЧС. Причина: неисправность электропроводки в зоне кондиционера. Горючий пенополистирольный утеплитель фасада сделал остальное.</span><span lang="en">Saturday. Around 9:20 AM, fire broke out on the ventilated facade of the third floor. By 9:40, emergency services were alerted. Cause: faulty wiring near an air conditioning unit. The combustible polystyrene insulation on the facade did the rest.</span>
+    Суббота. Около 9:20 утра огонь вспыхнул на вентилируемом фасаде третьего этажа. В 9:40 сигнал поступил в МЧС. Причина: неисправность электропроводки в зоне кондиционера. Горючий пенополистирольный утеплитель фасада сделал остальное.
   </p>
   <p>
-    <span lang="ru">Пожару присвоен ранг № 2 — второй по сложности. 77 пожарных, 25 единиц техники. За 20 минут огонь охватил 4 000 квадратных метров. Весь третий и четвёртый этаж. Фасад. Кровлю. В 10:45 пожар локализован. В 11:05 открытое горение ликвидировано.</span><span lang="en">The fire was classified as Rank 2, the second-highest severity. 77 firefighters. 25 vehicles. In 20 minutes, flames consumed 4,000 square meters. The entire third and fourth floors. The facade. The roof. By 10:45, the fire was contained. By 11:05, open flames were extinguished.</span>
+    Пожару присвоен ранг № 2 — второй по сложности. 77 пожарных, 25 единиц техники. За 20 минут огонь охватил 4 000 квадратных метров. Весь третий и четвёртый этаж. Фасад. Кровлю. В 10:45 пожар локализован. В 11:05 открытое горение ликвидировано.
   </p>
 </div>
 
 <!-- ═══ 7 MINUTES HERO ═══ -->
 <div style="text-align: center; padding: 48px 0;">
   <div style="font-size: 72px; font-weight: 800; color: var(--green); line-height: 1;">7</div>
-  <div style="font-size: 18px; font-weight: 700; margin-top: 8px;"><span lang="ru">минут</span><span lang="en">minutes</span></div>
+  <div style="font-size: 18px; font-weight: 700; margin-top: 8px;">минут</div>
   <div style="color: var(--text-muted); font-size: 14px; margin-top: 8px;">
-    <span lang="ru">72 человека. 52 гостя. 20 сотрудников. Ноль погибших.</span><span lang="en">72 people. 52 guests. 20 staff. Zero fatalities.</span>
+    72 человека. 52 гостя. 20 сотрудников. Ноль погибших.
   </div>
   <div style="color: var(--text-muted); font-size: 13px; margin-top: 12px; font-style: italic;">
-    <span lang="ru">«Если бы пожар произошёл ночью, могли быть погибшие.»<br>— Рафис Измайлов, начальник 15-й пожарно-спасательной части</span><span lang="en">"If the fire had happened at night, there could have been deaths."<br>— Rafis Izmailov, Chief of the 15th Fire and Rescue Station</span>
+    «Если бы пожар произошёл ночью, могли быть погибшие.»<br>
+    — Рафис Измайлов, начальник 15-й пожарно-спасательной части
   </div>
 </div>
 
 <div class="narrative">
   <p>
-    <span lang="ru">Семь минут — столько потребовалось, чтобы эвакуировать всех. 72 человека: 52 гостя и 20 сотрудников. Трое обратились за медицинской помощью с отравлением продуктами горения. Все отпущены в тот же день.</span><span lang="en">Seven minutes. That's how long it took to get everyone out. 72 people: 52 guests and 20 staff. Three were treated for smoke inhalation. All released the same day.</span>
+    Семь минут — столько потребовалось, чтобы эвакуировать всех. 72 человека: 52 гостя и 20 сотрудников. Трое обратились за медицинской помощью с отравлением продуктами горения. Все отпущены в тот же день.
   </p>
   <p>
-    <span lang="ru">Это не случайность. За предыдущие годы персонал прошёл 15 учебных эвакуаций — по ложным минированиям, которые регулярно случались в городе. Никто не планировал тренировать команду для настоящего пожара. Но когда он произошёл — каждый знал, что делать.</span><span lang="en">This wasn't luck. Over the preceding years, staff had completed 15 practice evacuations triggered by bomb threats that regularly hit the city. Nobody was training the team for a real fire. But when one came, every person knew exactly what to do.</span>
+    Это не случайность. За предыдущие годы персонал прошёл 15 учебных эвакуаций — по ложным минированиям, которые регулярно случались в городе. Никто не планировал тренировать команду для настоящего пожара. Но когда он произошёл — каждый знал, что делать.
   </p>
 </div>
 
 <div class="callout">
-  <span lang="ru"><strong>15 эвакуаций по ложным минированиям.</strong> Никто не знал, что тренирует команду к настоящему пожару. Иногда системы работают не так, как вы их проектировали. Но они работают.</span><span lang="en"><strong>15 evacuations from bomb threats.</strong> Nobody knew they were training the team for a real fire. Sometimes systems don't work the way you designed them. But they work.</span>
+  <strong>15 эвакуаций по ложным минированиям.</strong> Никто не знал, что тренирует команду к настоящему пожару. Иногда системы работают не так, как вы их проектировали. Но они работают.
 </div>
 
 <div class="narrative">
-  <h2><span lang="ru">Воскресенье</span><span lang="en">Sunday</span></h2>
+  <h2>Воскресенье</h2>
   <p>
-    <span lang="ru">На следующий день, в воскресенье, без вызова и без приказа — более ста сотрудников пришли в отель. С семьями. Убирать последствия. Выносить мебель. Спасать то, что можно спасти.</span><span lang="en">The next day, Sunday, without a call and without an order, over a hundred employees showed up at the hotel. With their families. To clean up the wreckage. To carry out furniture. To save whatever could be saved.</span>
+    На следующий день, в воскресенье, без вызова и без приказа — более ста сотрудников пришли в отель. С семьями. Убирать последствия. Выносить мебель. Спасать то, что можно спасти.
   </p>
   <p>
-    <span lang="ru">Помните — в COVID мы не уволили ни одного человека. Теперь они пришли без просьб.</span><span lang="en">Remember. During COVID, we didn't let a single person go. Now they came without being asked.</span>
+    Помните — в COVID мы не уволили ни одного человека. Теперь они пришли без просьб.
   </p>
 </div>
 
 <!-- ═══ THE DECISION ═══ -->
 <div class="warm-section">
   <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--text-muted); margin-bottom: 12px;">
-    <span lang="ru">РЕШЕНИЕ</span><span lang="en">THE DECISION</span>
+    РЕШЕНИЕ
   </div>
-  <h3><span lang="ru">Полное закрытие. Полная реконструкция.</span><span lang="en">Full shutdown. Full rebuild.</span></h3>
+  <h3>Полное закрытие. Полная реконструкция.</h3>
   <p>
-    <span lang="ru">Можно было открыть уцелевшие этажи. Работать частично. Минимизировать потери. Многие бы так и сделали.</span><span lang="en">We could have reopened the undamaged floors. Operated at partial capacity. Minimized losses. Most would have.</span>
+    Можно было открыть уцелевшие этажи. Работать частично. Минимизировать потери. Многие бы так и сделали.
   </p>
   <p style="margin-top: 12px;">
-    <span lang="ru">Светлана Гомберг решила иначе: полное закрытие. Полная реконструкция. Никаких компромиссов с качеством.</span><span lang="en">Svetlana Gomberg decided otherwise. Full closure. Full reconstruction. Zero compromise on quality.</span>
+    Светлана Гомберг решила иначе: полное закрытие. Полная реконструкция. Никаких компромиссов с качеством.
   </p>
   <p style="margin-top: 12px;">
-    <span lang="ru"><strong>Стоимость: более 90 миллионов рублей.</strong></span><span lang="en"><strong>Cost: over 90 million rubles.</strong></span>
+    <strong>Стоимость: более 90 миллионов рублей.</strong>
   </p>
   <p style="margin-top: 12px;">
-    <span lang="ru">Страховая сумма полиса: 250 миллионов рублей. Выплачено: 30 миллионов. Разница — наши деньги. Суд продолжается.</span><span lang="en">Insurance policy: 250 million rubles. Amount paid out: 30 million. The difference came out of our pocket. The lawsuit is ongoing.</span>
+    Страховая сумма полиса: 250 миллионов рублей. Выплачено: 30 миллионов. Разница — наши деньги. Суд продолжается.
   </p>
 </div>
 
 <!-- ═══ THE NUMBERS ═══ -->
 <div class="narrative">
-  <h2><span lang="ru">Цифры после пожара</span><span lang="en">The numbers after the fire</span></h2>
+  <h2>Цифры после пожара</h2>
 </div>
 
 <div class="metric-grid">
   <div class="metric-card">
-    <div class="label"><span lang="ru">Реконструкция</span><span lang="en">Reconstruction</span></div>
+    <div class="label">Реконструкция</div>
     <div class="value">90+</div>
-    <div class="sublabel"><span lang="ru">миллионов ₽</span><span lang="en">million ₽</span></div>
+    <div class="sublabel">миллионов ₽</div>
   </div>
   <div class="metric-card">
-    <div class="label"><span lang="ru">Страховой полис / выплата</span><span lang="en">Insurance policy / payout</span></div>
+    <div class="label">Страховой полис / выплата</div>
     <div class="value">250 / 30</div>
-    <div class="sublabel"><span lang="ru">миллионов ₽ · суд продолжается</span><span lang="en">million ₽ · lawsuit ongoing</span></div>
+    <div class="sublabel">миллионов ₽ · суд продолжается</div>
   </div>
   <div class="metric-card">
-    <div class="label"><span lang="ru">Выручка 2025</span><span lang="en">2025 revenue</span></div>
-    <div class="value" style="color: var(--green-dark);">206.4</div>
-    <div class="sublabel"><span lang="ru">млн ₽ · до пожара: 152 млн · рост 35.8%</span><span lang="en">M ₽ · pre-fire: 152M · up 35.8%</span></div>
+    <div class="label">Выручка 2025</div>
+    <div class="value" style="color: var(--green-dark);">172.7</div>
+    <div class="sublabel">млн ₽ · до пожара: 152 млн · рост 13.5%</div>
   </div>
   <div class="metric-card">
-    <div class="label"><span lang="ru">Уволено сотрудников</span><span lang="en">Employees laid off</span></div>
+    <div class="label">Уволено сотрудников</div>
     <div class="value" style="color: var(--green-dark);">0</div>
-    <div class="sublabel"><span lang="ru">ни во время COVID, ни после пожара</span><span lang="en">not during COVID, not after the fire</span></div>
+    <div class="sublabel">ни во время COVID, ни после пожара</div>
   </div>
 </div>
 
 <!-- ═══ WHY TRANSPARENT ═══ -->
 <div class="dark-section">
   <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--green); margin-bottom: 12px;">
-    <span lang="ru">ПОЧЕМУ МЫ ЭТО ПУБЛИКУЕМ</span><span lang="en">WHY WE PUBLISH THIS</span>
+    ПОЧЕМУ МЫ ЭТО ПУБЛИКУЕМ
   </div>
-  <h3><span lang="ru">После такого — прятать нечего.</span><span lang="en">After something like this, there's nothing left to hide.</span></h3>
+  <h3>После такого — прятать нечего.</h3>
   <p>
-    <span lang="ru">Когда ваш отель горит на камерах всего города, а на следующий день более ста человек приходят убирать без звонка — вопрос «что нам скрывать» перестаёт существовать.</span><span lang="en">When your hotel burns on every camera in town, and the next day over a hundred people show up to clean without a phone call, the question "what are we hiding" stops existing.</span>
+    Когда ваш отель горит на камерах всего города, а на следующий день более ста человек приходят убирать без звонка — вопрос «что нам скрывать» перестаёт существовать.
   </p>
   <p style="margin-top: 12px;">
-    <span lang="ru">Любой отель может опубликовать красивые цифры в хороший год. Мы публикуем свои показатели после пожара, после реконструкции за свой счёт, после суда со страховой.</span><span lang="en">Any hotel can publish nice numbers in a good year. We're publishing ours after a fire, after a self-funded rebuild, in the middle of an insurance lawsuit.</span>
+    Любой отель может опубликовать красивые цифры в хороший год. Мы публикуем свои показатели после пожара, после реконструкции за свой счёт, после суда со страховой.
   </p>
   <p style="margin-top: 20px;">
-    <span class="accent"><span lang="ru">Это не PR-ход. Это характер.</span><span lang="en">This isn't a PR move. This is character.</span></span>
+    <span class="accent">Это не PR-ход. Это характер.</span>
   </p>
 </div>
 
 <!-- ═══ THE HOTEL TODAY ═══ -->
 <div class="narrative">
-  <h2><span lang="ru">Отель сегодня</span><span lang="en">The hotel today</span></h2>
+  <h2>Отель сегодня</h2>
   <p>
-    <span lang="ru">108 номеров. 7 категорий — от Стандарта до Люкс Ямагучи. SPA-центр «SPA List» с собственной экологической философией. Ресторан. 3 конференц-зала и переговорная. ~125 сотрудников.</span><span lang="en">108 rooms. 7 categories, from Standard to Yamaguchi Suite. SPA List wellness center with its own ecological philosophy. Restaurant. 3 conference halls and a meeting room. Around 125 employees.</span>
+    108 номеров. 7 категорий — от Стандарта до Люкс Ямагучи. SPA-центр «SPA List» с собственной экологической философией. Ресторан. 3 конференц-зала и переговорная. ~125 сотрудников.
   </p>
   <p>
-    <span lang="ru">Набережные Челны — промышленный город на полмиллиона человек. Домашний завод КАМАЗа (32 000+ сотрудников). Город, в котором в 1993 году сгорел и был восстановлен моторный завод КАМАЗа. Здесь умеют строить заново. Не курортное направление. Не Москва. Не Казань. Город, где отель зарабатывает на бизнес-путешественниках и конференциях.</span><span lang="en">Naberezhnye Chelny is an industrial city of half a million people. Home of KAMAZ (32,000+ employees). The same city where the KAMAZ engine plant burned down in 1993 and was rebuilt. People here know how to start over. Not a resort town. Not Moscow. Not Kazan. A city where a hotel earns its revenue from business travelers and conferences.</span>
+    Набережные Челны — промышленный город на полмиллиона человек. Домашний завод КАМАЗа (32 000+ сотрудников). Город, в котором в 1993 году сгорел и был восстановлен моторный завод КАМАЗа. Здесь умеют строить заново. Не курортное направление. Не Москва. Не Казань. Город, где отель зарабатывает на бизнес-путешественниках и конференциях.
   </p>
 </div>
 
@@ -268,50 +868,56 @@
     <div class="context">/ 10</div>
   </div>
   <div class="hero-card">
-    <div class="label"><span lang="ru">Яндекс</span><span lang="en">Yandex</span></div>
+    <div class="label">Яндекс</div>
     <div class="value">5.0</div>
-    <div class="context">/ 5 · <span lang="ru">«Хорошее место 2026»</span><span lang="en">"Great Place 2026"</span></div>
+    <div class="context">/ 5 · «Хорошее место 2026»</div>
   </div>
   <div class="hero-card">
-    <div class="label">2GIS</div>
+    <div class="label">2ГИС</div>
     <div class="value">4.8</div>
-    <div class="context">/ 5 · 392 <span lang="ru">отзыва</span><span lang="en">reviews</span></div>
+    <div class="context">/ 5 · 392 отзыва</div>
   </div>
 </div>
 
 <!-- ═══ OWNER SECTION ═══ -->
 <div class="warm-section">
   <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--text-muted); margin-bottom: 12px;">
-    <span lang="ru">РУКОВОДИТЕЛЬ</span><span lang="en">LEADERSHIP</span>
+    РУКОВОДИТЕЛЬ
   </div>
-  <h3><span lang="ru">Светлана Гомберг</span><span lang="en">Svetlana Gomberg</span></h3>
+  <h3>Светлана Гомберг</h3>
   <p>
-    <span lang="ru">Совладелица и генеральный директор. Руководит отелем с момента открытия. Пережила кризисы 2014, COVID, пожар. Когда горел фасад — эвакуировала гостей лично. Когда страховая заплатила треть — достроила за свои. Когда предложили открыть частично — закрыла полностью и сделала как надо.</span><span lang="en">Co-owner and CEO. Has led the hotel since opening day. Survived the 2014 crisis, COVID, and the fire. When the facade was burning, she evacuated guests herself. When insurance paid a third, she covered the rest. When they suggested reopening partially, she shut everything down and rebuilt it right.</span>
+    Совладелица и генеральный директор. Руководит отелем с момента открытия. Пережила кризисы 2014, COVID, пожар.
+    Когда горел фасад — эвакуировала гостей лично. Когда страховая заплатила треть — достроила за свои.
+    Когда предложили открыть частично — закрыла полностью и сделала как надо.
   </p>
   <p style="margin-top: 12px; font-style: italic; color: var(--text-muted);">
-    <span lang="ru">«Горим. Без комментариев.»</span><span lang="en">"On fire. No comment."</span>
+    «Горим. Без комментариев.»
   </p>
 </div>
 
 <!-- ═══ CTA ═══ -->
 <div style="text-align: center; padding: 48px 0;">
   <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 16px;">
-    <span lang="ru">Эти цифры — не отчёт для инвесторов. Это доказательство, что после пожара можно не просто выжить.</span><span lang="en">These numbers aren't an investor report. They're proof that after a fire, you can do more than just survive.</span>
+    Эти цифры — не отчёт для инвесторов. Это доказательство, что после пожара можно не просто выжить.
   </p>
   <a href="index.html" style="display: inline-block; background: var(--bg-charcoal); color: white; padding: 14px 32px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 15px; transition: transform 0.15s;">
-    <span lang="ru">Смотреть дашборд &rarr;</span><span lang="en">View dashboard &rarr;</span>
+    Смотреть дашборд &rarr;
   </a>
 </div>
 
 
 
 <footer>
-  <div class="freshness"><span lang="ru">Данные по состоянию на февраль 2026</span><span lang="en">Data as of February 2026</span></div>
-  <p><a href="https://kamarooms.com">kamarooms.com</a> · <span lang="ru">Набережные Челны</span><span lang="en">Naberezhnye Chelny</span> · 108 <span lang="ru">номеров</span><span lang="en">rooms</span> · 4★</p>
-  <p class="tagline"><span lang="ru">Ни один другой отель этого не делает. В этом и суть.</span><span lang="en">No other hotel does this. That's the point.</span></p>
+  <div class="freshness">Данные по состоянию на февраль 2026</div>
+  <p>
+    <a href="https://kamarooms.com">kamarooms.com</a> · Набережные Челны · 108 номеров · 4★
+  </p>
+  <p class="tagline">
+    Ни один другой отель этого не делает. В этом и суть.
+  </p>
 </footer>
 </div>
 
-<script src="assets/i18n.js"></script>
+
 </body>
 </html>
