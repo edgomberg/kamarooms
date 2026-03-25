@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KamaRooms IT Architecture / IT-Архитектура</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+  :root {
+    --bg: #0b0d11;
+    --surface: #141619;
+    --surface2: #1a1d23;
+    --border: #252830;
+    --border-accent: #353840;
+    --text: #e8e8ed;
+    --text-dim: #8b8d97;
+    --text-muted: #5c5e66;
+    --accent: #6c8cff;
+    --green: #3dd68c;
+    --amber: #f5b731;
+    --red: #f06868;
+    --purple: #b07aff;
+    --teal: #2dd4bf;
+    --rose: #f472b6;
+    --orange: #fb923c;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  /* ── Header ── */
+  .header {
+    padding: 40px 48px 28px;
+    background: linear-gradient(180deg, #111318 0%, var(--bg) 100%);
+  }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .header h1 {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .header h1 .en {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-dim);
+    letter-spacing: 0;
+    margin-top: 4px;
+  }
+  .legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--text-dim);
+    font-weight: 500;
+  }
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+  }
+  .stats {
+    display: flex;
+    gap: 32px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+  }
+  .stat-value {
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-top: 4px;
+  }
+
+  /* ── Sections ── */
+  .content { padding: 0 48px 48px; }
+
+  .section {
+    margin-top: 40px;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .section-head h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .section-head .en {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  /* ── Mermaid ── */
+  .diagram-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 24px;
+    margin-top: 32px;
+    overflow-x: auto;
+  }
+  .diagram-caption {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 12px;
+    font-style: italic;
+  }
+  .mermaid { display: flex; justify-content: center; }
+  .mermaid svg { max-width: 100%; height: auto; }
+
+  /* ── Domain Cards Grid ── */
+  .domains {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 16px;
+  }
+  .domain-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .domain-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+  }
+  .domain-card.d-booking::before { background: var(--accent); }
+  .domain-card.d-guest::before { background: var(--teal); }
+  .domain-card.d-spa::before { background: var(--green); }
+  .domain-card.d-restaurant::before { background: var(--purple); }
+  .domain-card.d-finance::before { background: var(--red); }
+  .domain-card.d-analytics::before { background: var(--orange); }
+  .domain-card.d-infra::before { background: var(--text-muted); }
+
+  .domain-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+  }
+  .domain-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .domain-title .en {
+    display: block;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-top: 1px;
+  }
+  .domain-entity {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    white-space: nowrap;
+  }
+
+  .sys-list {
+    display: grid;
+    gap: 8px;
+  }
+  .sys-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    align-items: start;
+    padding: 8px 10px;
+    background: var(--surface2);
+    border-radius: 8px;
+  }
+  .sys-row.sys-gap {
+    border: 1px dashed var(--red);
+    background: rgba(240, 104, 104, 0.04);
+  }
+  .sys-row.sys-unconfirmed {
+    border: 1px dashed var(--amber);
+    background: rgba(245, 183, 49, 0.04);
+  }
+  .sys-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .sys-desc {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 1px;
+  }
+  .sys-owner {
+    font-size: 10px;
+    color: var(--text-muted);
+    text-align: right;
+    white-space: nowrap;
+    padding-top: 2px;
+  }
+
+  /* ── Entity Row ── */
+  .entities-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 32px;
+    padding: 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+  }
+  .entity-item h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .entity-item .role {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 2px;
+  }
+  .entity-item .role .en {
+    color: var(--text-muted);
+  }
+
+  /* ── Flows ── */
+  .flow-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 10px;
+  }
+  .flow-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .flow-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .flow-icon.fi-book { background: rgba(108,140,255,0.12); }
+  .flow-icon.fi-check { background: rgba(61,214,140,0.12); }
+  .flow-icon.fi-spa { background: rgba(244,114,182,0.12); }
+  .flow-icon.fi-food { background: rgba(176,122,255,0.12); }
+  .flow-icon.fi-money { background: rgba(251,146,60,0.12); }
+  .flow-icon.fi-hr { background: rgba(245,183,49,0.12); }
+  .flow-text {
+    flex: 1;
+  }
+  .flow-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .flow-label .en {
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-left: 6px;
+  }
+  .flow-path {
+    font-size: 11px;
+    color: var(--text-dim);
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    margin-top: 2px;
+  }
+
+  /* ── Gaps ── */
+  .gaps-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+  }
+  .gap-item {
+    padding: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    border-left: 3px solid;
+  }
+  .gap-item.g-high { border-left-color: var(--red); }
+  .gap-item.g-med { border-left-color: var(--amber); }
+  .gap-item.g-low { border-left-color: var(--accent); }
+  .gap-sev {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 4px;
+  }
+  .gap-sev.s-high { color: var(--red); }
+  .gap-sev.s-med { color: var(--amber); }
+  .gap-sev.s-low { color: var(--accent); }
+  .gap-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .gap-desc {
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+  .gap-domain {
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-top: 6px;
+  }
+
+  /* ── Pending ── */
+  .pending-box {
+    margin-top: 40px;
+    padding: 24px;
+    background: rgba(245, 183, 49, 0.04);
+    border: 1px solid rgba(245, 183, 49, 0.2);
+    border-radius: 14px;
+  }
+  .pending-box h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--amber);
+    margin-bottom: 12px;
+  }
+  .pending-box h3 .en {
+    font-weight: 400;
+    color: var(--text-muted);
+    font-size: 12px;
+    margin-left: 8px;
+  }
+  .pending-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 8px;
+    list-style: none;
+  }
+  .pending-list li {
+    padding: 10px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .pending-list .q-en {
+    display: block;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 48px;
+    padding: 20px 48px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    .header, .content, .footer { padding-left: 20px; padding-right: 20px; }
+    .header h1 { font-size: 24px; }
+    .stats { gap: 20px; }
+    .stat-value { font-size: 22px; }
+    .domains { grid-template-columns: 1fr; }
+    .flow-grid { grid-template-columns: 1fr; }
+    .gaps-list { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════ HEADER ════════ -->
+<div class="header">
+  <div class="header-top">
+    <h1>
+      IT-Архитектура KamaRooms
+      <span class="en">IT Architecture / L2 Container Map</span>
+    </h1>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div> Работает / Active</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div> Не подтверждено / Unconfirmed</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--red); border-radius:50%"></div> Пробел / Gap</div>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-value">25</div>
+      <div class="stat-label">Систем / Systems</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">7</div>
+      <div class="stat-label">Доменов / Domains</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">3</div>
+      <div class="stat-label">Юрлица / Entities</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" style="color:var(--red)">7</div>
+      <div class="stat-label">Пробелов / Gaps</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">~125</div>
+      <div class="stat-label">Сотрудников / Staff</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ LEGAL ENTITIES ════════ -->
+<div class="content">
+
+<div class="entities-row">
+  <div class="entity-item">
+    <h3>ООО Пульс</h3>
+    <div class="role">Отель (108 номеров) + СПА «SPA List» <span class="en">/ Hotel + SPA</span></div>
+  </div>
+  <div class="entity-item">
+    <h3>ООО Подсолнух</h3>
+    <div class="role">Ресторан «Boho» <span class="en">/ Restaurant</span></div>
+  </div>
+  <div class="entity-item">
+    <h3>ООО Капитан</h3>
+    <div class="role">Здание (аренда) <span class="en">/ Property holding</span></div>
+  </div>
+  <div class="entity-item">
+    <h3>4 ИП подрядчиков</h3>
+    <div class="role">Халим, Семён и др. <span class="en">/ Contractors</span></div>
+  </div>
+</div>
+
+<!-- ════════ HIGH-LEVEL FLOW DIAGRAM ════════ -->
+<div class="diagram-wrap">
+<pre class="mermaid">
+%%{init: {
+  'theme': 'dark',
+  'themeVariables': {
+    'primaryColor': '#252830',
+    'primaryTextColor': '#e8e8ed',
+    'primaryBorderColor': '#353840',
+    'lineColor': '#5c5e66',
+    'secondaryColor': '#1a1d23',
+    'tertiaryColor': '#252830',
+    'fontSize': '12px',
+    'fontFamily': 'Inter, -apple-system, system-ui, sans-serif'
+  }
+}}%%
+
+graph LR
+  GUEST(("Гость\nGuest"))
+
+  subgraph PULS["ООО Пульс"]
+    direction TB
+    BOOK["Бронирование\nBooking\n3 системы"]
+    GS["Гостевой сервис\nGuest Service\n4 системы"]
+    SPA["СПА SPA List\n3 системы"]
+    FIN["Бухгалтерия\nAccounting\n1С + ❓"]
+    BI["Аналитика\nAnalytics\n3 системы"]
+    INFRA["Инфраструктура\nInfra\n5 систем"]
+  end
+
+  subgraph PODS["ООО Подсолнух"]
+    REST["Ресторан Boho\n2 системы"]
+  end
+
+  EXT(["OTA / Банки\nГосключ / ФНС"])
+
+  GUEST --> BOOK
+  GUEST --> GS
+  GUEST --> SPA
+  BOOK <--> EXT
+  BOOK --> GS
+  SPA --> FIN
+  REST --> FIN
+  BOOK --> FIN
+  FIN --> EXT
+  FIN --> BI
+  BOOK --> BI
+  INFRA -.-> BOOK & GS & SPA & REST & FIN & BI
+
+  classDef entity fill:#1a1d23,stroke:#353840,color:#e8e8ed
+  classDef guest fill:#141619,stroke:#6c8cff,color:#6c8cff,stroke-width:2px
+  classDef ext fill:#141619,stroke:#8b8d97,color:#8b8d97
+  classDef puls fill:#141619,stroke:#3dd68c,color:#e8e8ed
+  classDef pods fill:#141619,stroke:#b07aff,color:#e8e8ed
+
+  class GUEST guest
+  class EXT ext
+  class BOOK,GS,SPA,FIN,BI,INFRA puls
+  class REST pods
+</pre>
+<div class="diagram-caption">Обзор: как домены связаны между собой / Overview: how domains connect</div>
+</div>
+
+<!-- ════════ DOMAIN CARDS ════════ -->
+<div class="section">
+  <div class="section-head">
+    <h2>Системы по доменам</h2>
+    <span class="en">Systems by Domain</span>
+  </div>
+  <div class="domains">
+
+    <!-- Booking -->
+    <div class="domain-card d-booking">
+      <div class="domain-header">
+        <div class="domain-title">Бронирование и каналы<span class="en">Booking &amp; Distribution</span></div>
+        <span class="domain-entity">Пульс</span>
+      </div>
+      <div class="sys-list">
+        <div class="sys-row">
+          <div><div class="sys-name">Travelline</div><div class="sys-desc">PMS + Channel Manager. Центральный хаб.</div></div>
+          <div class="sys-owner">Эмилия</div>
+        </div>
+        <div class="sys-row">
+          <div><div class="sys-name">2roomz</div><div class="sys-desc">Мобильный сервис гостя / Mobile guest app</div></div>
+          <div class="sys-owner">Семён</div>
+        </div>
+        <div class="sys-row">
+          <div><div class="sys-name">Tilda</div><div class="sys-desc">kamarooms.com + виджет Travelline</div></div>
+          <div class="sys-owner">Лилия</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Guest Service -->
+    <div class="domain-card d-guest">
+      <div class="domain-header">
+        <div class="domain-title">Гостевой сервис<span class="en">Guest Service</span></div>
+        <span class="domain-entity">Пульс</span>
+      </div>
+      <div class="sys-list">
+        <div class="sys-row">
+          <div><div class="sys-name">Megafon VATS</div><div class="sys-desc">IP-телефония, внутренние линии</div></div>
+          <div class="sys-owner">Лилия</div>
+        </div>
+        <div class="sys-row">
+          <div><div class="sys-name">Jivosite + AI</div><div class="sys-desc">Чат на сайте СПА, AI-оператор</div></div>
+          <div class="sys-owner">Ирина</div>
+        </div>
+        <div class="sys-row">
+          <div><div class="sys-name">TeamJet</div><div class="sys-desc">Заявки: СПА, HSKP, инженеры / Task mgmt</div></div>
+          <div class="sys-owner">СПА / HSKP</div>
+        </div>
+        <div class="sys-row">
+          <div><div class="sys-name">НЕТ МОНЕТ</div><div class="sys-desc">Цифровые чаевые + рейтинг / Digital tipping</div></div>
+          <div class="sys-owner">Айгуль</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SPA -->
+    <div class="domain-card d-spa">
+      <div class="domain-header">
+        <div class="domain-title">СПА «SPA List»<span class="en">SPA Operations</span></div>
+        <span class="domain-entity">Пульс</span>
+      </div>
+      <div class="sys-list">
+        <div class="sys-row">
+          <div><div class="sys-name">Bitrix24 CRM</div><div class="sys-desc">crm.spa-list.ru. Воронки, интегратор Халим.</div></div>
+          <div class="sys-owner">Ирина + Халим</div>
+        </div>
+        <div class="sys-row">
+          <div><div class="sys-name">1С СПА</div><div class="sys-desc">Выручка, тарифы, ежедневная отчётность</div></div>
+          <div class="sys-owner">Ирина</div>
+        </div>
+        <div class="sys-row">
+          <div><div class="sys-name">INSITE (ФП)</div><div class="sys-desc">Финпланирование и закупки / Procurement</div></div>
+          <div class="sys-owner">Ирина</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Restaurant -->
+    <div class="domain-card d-restaurant">
+      <div class="domain-header">
+        <div class="domain-title">Ресторан «Boho»<span class="en">Restaurant</span></div>
+        <span class="domain-entity">Подсолнух</span>
+      </div>
+      <div class="sys-list">
+        <div class="sys-row">
+          <div><div class="sys-name">R-Keeper</div><div class="sys-desc">POS / касса, меню, чеки</div></div>
+          <div class="sys-owner">Софья</div>
+        </div>
+        <div class="sys-row">
+          <div><div class="sys-name">iiko</div><div class="sys-desc">Выручка, food cost, складской учёт</div></div>
+          <div class="sys-owner">Софья</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Finance & HR -->
+    <div class="domain-card d-finance">
+      <div class="domain-header">
+        <div class="domain-title">Бухгалтерия и кадры<span class="en">Finance &amp; HR</span></div>
+        <span class="domain-entity">Пульс</span>
+      </div>
+      <div class="sys-list">
+        <div class="sys-row">
+          <div><div class="sys-name">1С:Бухгалтерия</div><div class="sys-desc">ERP. Главная книга, ОС, отчётность ФНС</div></div>
+          <div class="sys-owner">Наталья</div>
+        </div>
+        <div class="sys-row sys-unconfirmed">
+          <div><div class="sys-name">1С:ЗУП ❓</div><div class="sys-desc">Зарплата / Payroll. Статус не подтверждён.</div></div>
+          <div class="sys-owner">?</div>
+        </div>
+        <div class="sys-row sys-gap">
+          <div><div class="sys-name">КЭДО ❓</div><div class="sys-desc">Электронные договоры / HR docs. Платформа не выбрана.</div></div>
+          <div class="sys-owner">--</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analytics -->
+    <div class="domain-card d-analytics">
+      <div class="domain-header">
+        <div class="domain-title">Аналитика и управление<span class="en">Analytics &amp; Management</span></div>
+        <span class="domain-entity">Пульс</span>
+      </div>
+      <div class="sys-list">
+        <div class="sys-row">
+          <div><div class="sys-name">Yandex Metrica</div><div class="sys-desc">Веб-аналитика: воронка, трафик, конверсия</div></div>
+          <div class="sys-owner">Семён</div>
+        </div>
+        <div class="sys-row">
+          <div><div class="sys-name">Notion</div><div class="sys-desc">HQ, ролевые карточки, чек-листы / Wiki</div></div>
+          <div class="sys-owner">Управление</div>
+        </div>
+        <div class="sys-row">
+          <div><div class="sys-name">Owner Dashboard</div><div class="sys-desc">Sheets: загрузка, ADR, RevPAR, P&L</div></div>
+          <div class="sys-owner">Эд + Светлана</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Infrastructure -->
+    <div class="domain-card d-infra">
+      <div class="domain-header">
+        <div class="domain-title">Инфраструктура<span class="en">Infrastructure</span></div>
+        <span class="domain-entity">Пульс</span>
+      </div>
+      <div class="sys-list">
+        <div class="sys-row">
+          <div><div class="sys-name">Yandex 360</div><div class="sys-desc">Почта и офис (текущая) / Current email</div></div>
+          <div class="sys-owner">Семён</div>
+        </div>
+        <div class="sys-row">
+          <div><div class="sys-name">Google Workspace</div><div class="sys-desc">Миграция. kamarooms.org / Migration in progress</div></div>
+          <div class="sys-owner">Семён</div>
+        </div>
+        <div class="sys-row">
+          <div><div class="sys-name">Keeper</div><div class="sys-desc">Менеджер паролей (Feb 2026) / Password mgr</div></div>
+          <div class="sys-owner">Семён</div>
+        </div>
+        <div class="sys-row">
+          <div><div class="sys-name">HIC-CONNECT / iVMS</div><div class="sys-desc">Видеонаблюдение / CCTV</div></div>
+          <div class="sys-owner">Владимир</div>
+        </div>
+        <div class="sys-row">
+          <div><div class="sys-name">Локальная сеть</div><div class="sys-desc">Серверы, WiFi, DNS. Нет сегментации.</div></div>
+          <div class="sys-owner">Владимир</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════ KEY FLOWS ════════ -->
+<div class="section">
+  <div class="section-head">
+    <h2>Ключевые потоки данных</h2>
+    <span class="en">Key Data Flows</span>
+  </div>
+  <div class="flow-grid">
+    <div class="flow-item">
+      <div class="flow-icon fi-book">🏨</div>
+      <div class="flow-text">
+        <div class="flow-label">Бронирование<span class="en">Guest Booking</span></div>
+        <div class="flow-path">Гость → Tilda → Travelline → OTA → Банк</div>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-icon fi-check">🔑</div>
+      <div class="flow-text">
+        <div class="flow-label">Заезд<span class="en">Check-in</span></div>
+        <div class="flow-path">Travelline → 2roomz → HIC-CONNECT</div>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-icon fi-spa">💆</div>
+      <div class="flow-text">
+        <div class="flow-label">Запись в СПА<span class="en">SPA Booking</span></div>
+        <div class="flow-path">Гость → Jivosite AI → Bitrix24 → 1С СПА</div>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-icon fi-food">🍽</div>
+      <div class="flow-text">
+        <div class="flow-label">Ресторан<span class="en">Restaurant</span></div>
+        <div class="flow-path">Персонал → R-Keeper → iiko → 1С</div>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-icon fi-money">💰</div>
+      <div class="flow-text">
+        <div class="flow-label">Консолидация выручки<span class="en">Revenue</span></div>
+        <div class="flow-path">TL + RK + 1С СПА → 1С:Бухг → Dashboard</div>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-icon fi-hr">📋</div>
+      <div class="flow-text">
+        <div class="flow-label">Кадры (план)<span class="en">HR (planned)</span></div>
+        <div class="flow-path">1С:ЗУП❓ → КЭДО❓ → Госключ → Подпись</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ GAPS ════════ -->
+<div class="section">
+  <div class="section-head">
+    <h2>Архитектурные пробелы</h2>
+    <span class="en">Architectural Gaps</span>
+  </div>
+  <div class="gaps-list">
+    <div class="gap-item g-high">
+      <div class="gap-sev s-high">HIGH</div>
+      <div class="gap-title">Нет единого SSO</div>
+      <div class="gap-desc">Каждая система со своим логином. Общие пароли до Keeper. <br>No single sign-on across 25 systems.</div>
+      <div class="gap-domain">Домен: Инфраструктура</div>
+    </div>
+    <div class="gap-item g-high">
+      <div class="gap-sev s-high">HIGH</div>
+      <div class="gap-title">Нет централизованного бэкапа</div>
+      <div class="gap-desc">Потеря данных при сбое. Нет плана восстановления. <br>No backup or disaster recovery plan.</div>
+      <div class="gap-domain">Домен: Инфраструктура</div>
+    </div>
+    <div class="gap-item g-high">
+      <div class="gap-sev s-high">HIGH</div>
+      <div class="gap-title">Нет КЭДО</div>
+      <div class="gap-desc">Только бумажные договоры. Нет электронной подписи. <br>Paper contracts only. No e-signatures.</div>
+      <div class="gap-domain">Домен: Бухгалтерия и кадры</div>
+    </div>
+    <div class="gap-item g-high">
+      <div class="gap-sev s-high">HIGH</div>
+      <div class="gap-title">1С:ЗУП статус неизвестен</div>
+      <div class="gap-desc">Блокирует выбор платформы КЭДО. <br>Blocks КЭДО platform selection.</div>
+      <div class="gap-domain">Домен: Бухгалтерия и кадры</div>
+    </div>
+    <div class="gap-item g-med">
+      <div class="gap-sev s-med">MEDIUM</div>
+      <div class="gap-title">Нет сегментации сети</div>
+      <div class="gap-desc">Гостевой и рабочий WiFi не разделены. PCI DSS risk. <br>Guest/staff WiFi not separated.</div>
+      <div class="gap-domain">Домен: Инфраструктура</div>
+    </div>
+    <div class="gap-item g-med">
+      <div class="gap-sev s-med">MEDIUM</div>
+      <div class="gap-title">Нет API-шлюза</div>
+      <div class="gap-desc">Прямые точка-точка интеграции. Хрупко. <br>Direct point-to-point integrations.</div>
+      <div class="gap-domain">Домен: Все</div>
+    </div>
+    <div class="gap-item g-low">
+      <div class="gap-sev s-low">LOW</div>
+      <div class="gap-title">Два почтовых сервиса</div>
+      <div class="gap-desc">Yandex 360 + Google Workspace параллельно. <br>Email migration incomplete.</div>
+      <div class="gap-domain">Домен: Инфраструктура</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ PENDING ════════ -->
+<div class="pending-box">
+  <h3>Ожидаем ответы команды<span class="en">Pending Team Validation</span></h3>
+  <ul class="pending-list">
+    <li>1С:ЗУП сейчас работает в Пульсе?<span class="q-en">Is 1C:ZUP active at Puls?</span></li>
+    <li>Кто в каком юрлице оформлен?<span class="q-en">Which entity is each person employed under?</span></li>
+    <li>Сколько примерно на трудовом, сколько на ГПХ?<span class="q-en">How many on employment vs contractor agreements?</span></li>
+    <li>СБИС используется для отчётности?<span class="q-en">Is SBIS used for government reporting?</span></li>
+  </ul>
+</div>
+
+</div><!-- /content -->
+
+<div class="footer">
+  <span>KamaRooms Hotel Group. ООО Пульс / ООО Подсолнух / ООО Капитан</span>
+  <span>Черновик. Ожидает валидации командой. Март 2026 / Draft. March 2026</span>
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark',
+    securityLevel: 'loose',
+    flowchart: {
+      useMaxWidth: true,
+      htmlLabels: true,
+      curve: 'basis',
+      padding: 15,
+      nodeSpacing: 25,
+      rankSpacing: 35
+    }
+  });
+</script>
+</body>
+</html>
