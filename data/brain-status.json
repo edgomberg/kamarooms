@@ -1,0 +1,31 @@
+{
+  "generated_at": "2026-04-22T15:02:04.659880Z",
+  "run_date": "2026-04-22",
+  "status": "OK",
+  "sources": {
+    "daily_revenue": {
+      "status": "OK",
+      "notes": "28 days parsed"
+    },
+    "financial_model": {
+      "status": "OK",
+      "notes": "12 months FY24-25"
+    },
+    "reviews": {
+      "status": "SKIPPED",
+      "notes": "Playwright not run"
+    },
+    "competitors": {
+      "status": "SKIPPED",
+      "notes": "Playwright not run"
+    },
+    "travelline": {
+      "status": "SKIPPED",
+      "notes": "No credentials"
+    }
+  },
+  "sources_ok_count": 2,
+  "degraded": false,
+  "alerts": [],
+  "errors": []
+}

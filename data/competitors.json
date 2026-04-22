@@ -1,0 +1,7 @@
+{
+  "generated_at": "2026-04-22T15:02:04.659880Z",
+  "competitors": [],
+  "status": "SKIPPED_THIS_RUN",
+  "reason": "Playwright competitor scrape not executed this cycle.",
+  "source_tag_policy": "Every competitor record must include \"source\": \"estimated\" or \"live\" when populated."
+}

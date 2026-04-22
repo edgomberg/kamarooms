@@ -1,0 +1,25 @@
+{
+  "generated_at": "2026-04-22T15:02:04.659880Z",
+  "platforms": {
+    "booking_com": {
+      "rating": null,
+      "review_count": null,
+      "stale": true,
+      "note": "Playwright run not executed this cycle"
+    },
+    "yandex_maps": {
+      "rating": null,
+      "review_count": null,
+      "stale": true,
+      "note": "Playwright run not executed this cycle"
+    },
+    "2gis": {
+      "rating": null,
+      "review_count": null,
+      "stale": true,
+      "note": "Playwright run not executed this cycle"
+    }
+  },
+  "status": "SKIPPED_THIS_RUN",
+  "reason": "Review platforms require Playwright session; skipped in lightweight daily pull."
+}

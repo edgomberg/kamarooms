@@ -1,0 +1,30 @@
+{
+  "generated_at": "2026-04-22T15:01:50.478567Z",
+  "period": "Feb 2026 (latest sheet period)",
+  "days_count": 28,
+  "latest_day": {
+    "date": "28.02",
+    "plan": 374167.0,
+    "variance": -65945.0,
+    "sales_total": 308222.0,
+    "rooms_sold": 32.0,
+    "guest_days": 46.0,
+    "revpar": 2497.0,
+    "adr": 8273.0,
+    "occupancy_pct": 30.0
+  },
+  "period_total": {
+    "plan": 15800000.0,
+    "variance": 2314706.0,
+    "sales_total": 18114706.0,
+    "rooms_sold": 2320.0,
+    "guest_days": 2782.0,
+    "revpar": 5613.0,
+    "adr": 7224.0,
+    "occupancy_pct": 78.0
+  },
+  "mtd_pace_pct_vs_plan": 114.7,
+  "trailing_7_avg_occupancy_pct": 63.9,
+  "source": "Google Sheets daily revenue",
+  "note": "Sheet showed February period as latest populated month at fetch time."
+}
