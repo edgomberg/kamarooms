@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-04-22T15:02:04.659880Z",
-  "run_date": "2026-04-22",
+  "generated_at": "2026-04-23T15:01:58.620415Z",
+  "run_date": "2026-04-23",
   "status": "OK",
   "sources": {
     "daily_revenue": {
@@ -13,11 +13,11 @@
     },
     "reviews": {
       "status": "SKIPPED",
-      "notes": "Playwright not run"
+      "notes": "Playwright not run (headless)"
     },
     "competitors": {
       "status": "SKIPPED",
-      "notes": "Playwright not run"
+      "notes": "Playwright not run (headless)"
     },
     "travelline": {
       "status": "SKIPPED",

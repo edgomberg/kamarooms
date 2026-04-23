@@ -1,64 +1,98 @@
 {
-  "generated_at": "2026-04-22T15:01:50.479554Z",
-  "entity": "Group (aggregated)",
+  "generated_at": "2026-04-23T15:01:58.620415Z",
+  "period": "FY24-25 (Jul24-Jun25)",
   "months": [
-    "Июль24",
-    "Август24",
-    "Сентябрь24",
-    "Октябрь24",
-    "Ноябрь24",
-    "Декабрь24",
-    "Январь25",
-    "Февраль25",
-    "Март25",
-    "Апрель25",
-    "Май25",
-    "Июнь25"
+    {
+      "month": "Июль24",
+      "revenue": 13302001.0,
+      "expenses": 12044920.0,
+      "operating_result": 1257081.0,
+      "margin_pct": 9.5
+    },
+    {
+      "month": "Август24",
+      "revenue": 15493299.0,
+      "expenses": 15610756.0,
+      "operating_result": -117457.0,
+      "margin_pct": -0.8
+    },
+    {
+      "month": "Сентябрь24",
+      "revenue": 15641049.0,
+      "expenses": 13015241.0,
+      "operating_result": 2625808.0,
+      "margin_pct": 16.8
+    },
+    {
+      "month": "Октябрь24",
+      "revenue": 16936408.0,
+      "expenses": 16737955.0,
+      "operating_result": 198453.0,
+      "margin_pct": 1.2
+    },
+    {
+      "month": "Ноябрь24",
+      "revenue": 16755883.0,
+      "expenses": 15113806.0,
+      "operating_result": 1642077.0,
+      "margin_pct": 9.8
+    },
+    {
+      "month": "Декабрь24",
+      "revenue": 21569644.0,
+      "expenses": 27975537.0,
+      "operating_result": -6405893.0,
+      "margin_pct": -29.7
+    },
+    {
+      "month": "Январь25",
+      "revenue": 15669548.0,
+      "expenses": 11409665.0,
+      "operating_result": 4259883.0,
+      "margin_pct": 27.2
+    },
+    {
+      "month": "Февраль25",
+      "revenue": 17524518.0,
+      "expenses": 21716792.0,
+      "operating_result": -4192274.0,
+      "margin_pct": -23.9
+    },
+    {
+      "month": "Март25",
+      "revenue": 22070613.0,
+      "expenses": 13402851.0,
+      "operating_result": 8667762.0,
+      "margin_pct": 39.3
+    },
+    {
+      "month": "Апрель25",
+      "revenue": 17464238.0,
+      "expenses": 18294664.0,
+      "operating_result": -830426.0,
+      "margin_pct": -4.8
+    },
+    {
+      "month": "Май25",
+      "revenue": 15851055.0,
+      "expenses": 16239053.0,
+      "operating_result": -387998.0,
+      "margin_pct": -2.4
+    },
+    {
+      "month": "Июнь25",
+      "revenue": 18084770.0,
+      "expenses": 16739354.0,
+      "operating_result": 1345416.0,
+      "margin_pct": 7.4
+    }
   ],
-  "revenue_rub": [
-    13302001.0,
-    15493299.0,
-    15641049.0,
-    16936408.0,
-    16755883.0,
-    21569644.0,
-    15669548.0,
-    17524518.0,
-    22070613.0,
-    17464238.0,
-    15851055.0,
-    18084770.0
-  ],
-  "total_expenses_rub": [
-    12044920.0,
-    15610756.0,
-    13015241.0,
-    16737955.0,
-    15113806.0,
-    27975537.0,
-    11409665.0,
-    21716792.0,
-    13402851.0,
-    18294664.0,
-    16239053.0,
-    16739354.0
-  ],
-  "operating_margin_pct": [
-    9.5,
-    -0.8,
-    16.8,
-    1.2,
-    9.8,
-    -29.7,
-    27.2,
-    -23.9,
-    39.3,
-    -4.8,
-    -2.4,
-    7.4
-  ],
-  "fy_total_revenue_rub": 206363027.0,
-  "fy_total_expense_rub": 198300594.0,
-  "source": "Financial Model.xlsx via Drive CSV export",
-  "note": "Monthly series Jul24–Jun25 aggregated at group level; no entity names, no dividends, no cash."
+  "year_totals": {
+    "revenue": 206363026.0,
+    "expenses": 198300594.0,
+    "operating_result": 8062432.0,
+    "margin_pct": 3.9
+  },
+  "source": "Google Sheets financial model (aggregated)",
+  "note": "Entity-level P&L aggregated into a single Group view. No entity names, dividends, or cash positions included."
 }
